@@ -11,8 +11,8 @@ public class Main {
         myHashMap.put(4,"Ivan");
         myHashMap.put(5,"Olia");
         System.out.println(myHashMap.get(2));
-        System.out.println(myHashMap.size());
+        System.out.println(myHashMap.getSize());
         System.out.println(myHashMap.remove(2));
-        System.out.println(myHashMap.size());
+        System.out.println(myHashMap.getSize());
     }
 }

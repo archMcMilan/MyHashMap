@@ -201,4 +201,8 @@ public class MyHashMap<K, V> {
             }
         }
     }
+
+    public int getSize() {
+        return size;
+    }
 }
