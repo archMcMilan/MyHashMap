@@ -105,15 +105,12 @@ public class MyHashMap<K, V> {
             return entry.getValue();
         } else {//bucket cell has element
             Entry<K, V> current = buckets[hash];
-            if (current.getKey().equals(entry.getKey())) {//if buckets contains element with same key
-                current.setValue(entry.getValue());//change value to new
-                return entry.getValue();
-            }
-            while (current.next != null) {//find last element in chain by next filed in Enrty
-                current = current.next;
+            while (current != null) {//find last element in chain by next filed in Enrty
                 if (current.getKey().equals(entry.getKey())) {//if buckets contains element with same key
+                    current.setValue(entry.getValue());//change value to new
                     return entry.getValue();
                 }
+                current = current.next;
             }
             current.setNext(entry);
             return entry.getValue();
@@ -133,17 +130,14 @@ public class MyHashMap<K, V> {
             return null;
         }
         Entry<K, V> currentWithSameKeyHashCode = buckets[hash];
-        if (currentWithSameKeyHashCode.getKey().equals(key)) {//check element with same key.hashCode() on key equals
-            return currentWithSameKeyHashCode.getValue();//find with same key
-        } else {
-            while (currentWithSameKeyHashCode.next != null) {//go through all elements with same key.hashCode()
-                currentWithSameKeyHashCode = currentWithSameKeyHashCode.next;
-                if (currentWithSameKeyHashCode.getKey().equals(key)) {//if buckets contains element with same key
-                    return currentWithSameKeyHashCode.getValue();
-                }
+
+        while (currentWithSameKeyHashCode != null) {//go through all elements with same key.hashCode()
+            if (currentWithSameKeyHashCode.getKey().equals(key)) {//if buckets contains element with same key
+                return currentWithSameKeyHashCode.getValue();
             }
-            return null;//map contains elements with same key.hashCode(), but not with same key
+            currentWithSameKeyHashCode = currentWithSameKeyHashCode.next;
         }
+        return null;//map contains elements with same key.hashCode(), but not with same key
 
     }
 
